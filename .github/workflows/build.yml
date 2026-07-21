@@ -23,10 +23,14 @@ jobs:
       - name: Create local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
-      - name: Build APK
+      - name: Download and use Gradle 8.5
         run: |
-          gradle wrapper --gradle-version 8.5
-          ./gradlew assembleDebug --no-daemon
+          curl -sSL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/
+          echo "/tmp/gradle-8.5/bin" >> $GITHUB_PATH
+
+      - name: Build APK
+        run: gradle assembleDebug --no-daemon --warning-mode all
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
