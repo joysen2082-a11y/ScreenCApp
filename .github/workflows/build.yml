@@ -32,16 +32,17 @@ jobs:
       - name: Build APK
         run: gradle assembleDebug --no-daemon --warning-mode all
 
-      - name: Locate APK files
+      - name: Locate and copy APK
         run: |
           echo "=== 查找 APK ==="
           find . -name "*.apk" -type f
-          echo "=== 构建输出目录 ==="
-          ls -la app/build/outputs/apk/ 2>/dev/null || echo "无 apk 目录"
-          ls -laR app/build/outputs/ 2>/dev/null | head -50
+          echo "=== APK 大小 ==="
+          ls -lh app/build/outputs/apk/debug/app-debug.apk
+          echo "=== 复制到工作目录 ==="
+          cp app/build/outputs/apk/debug/app-debug.apk app-debug.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: ScreenCaptureApp-debug
-          path: "**/*.apk"
+          path: app-debug.apk
