@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">投屏助手</string>
+    <string name="channel_name">截屏服务</string>
+    <string name="channel_desc">后台截屏服务运行中</string>
+    <string name="service_running">正在截屏发送到电脑</string>
+    <string name="start_capture">开始截屏</string>
+    <string name="stop_capture">停止</string>
+    <string name="server_ip_hint">电脑IP地址</string>
+    <string name="server_port_hint">端口 (默认 5000)</string>
+    <string name="interval_hint">截屏间隔(秒, 默认 1)</string>
+</resources>
