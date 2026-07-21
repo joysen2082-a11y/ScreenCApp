@@ -36,13 +36,14 @@ jobs:
         run: |
           echo "=== 查找 APK ==="
           find . -name "*.apk" -type f
-          echo "=== APK 大小 ==="
-          ls -lh app/build/outputs/apk/debug/app-debug.apk
-          echo "=== 复制到工作目录 ==="
-          cp app/build/outputs/apk/debug/app-debug.apk app-debug.apk
+          echo "=== 复制 APK ==="
+          cp -v app/build/outputs/apk/debug/app-debug.apk $GITHUB_WORKSPACE/
+          echo "=== 验证复制结果 ==="
+          ls -lh $GITHUB_WORKSPACE/app-debug.apk
+          file $GITHUB_WORKSPACE/app-debug.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: ScreenCaptureApp-debug
-          path: app-debug.apk
+          name: ScreenCapture-v1
+          path: ${{ github.workspace }}/app-debug.apk
