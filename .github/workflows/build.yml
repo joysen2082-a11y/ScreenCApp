@@ -32,18 +32,11 @@ jobs:
       - name: Build APK
         run: gradle assembleDebug --no-daemon --warning-mode all
 
-      - name: Locate and copy APK
-        run: |
-          echo "=== 查找 APK ==="
-          find . -name "*.apk" -type f
-          echo "=== 复制 APK ==="
-          cp -v app/build/outputs/apk/debug/app-debug.apk $GITHUB_WORKSPACE/
-          echo "=== 验证复制结果 ==="
-          ls -lh $GITHUB_WORKSPACE/app-debug.apk
-          file $GITHUB_WORKSPACE/app-debug.apk
+      - name: Copy APK to workspace root
+        run: cp -v app/build/outputs/apk/debug/app-debug.apk $GITHUB_WORKSPACE/
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: ScreenCapture-v1
+          name: ScreenCaptureApp
           path: ${{ github.workspace }}/app-debug.apk
